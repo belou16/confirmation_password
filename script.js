@@ -19,7 +19,7 @@ document
     };
 
     // Envoi de l'email via EmailJS
-    emailjs.send("service_50vwsmg", "template_l2cmtvo", templateParams).then(
+    emailjs.send("service_548dlph", "template_1m2mgz5", templateParams).then(
       function (response) {
         console.log("Mot de passe envoyé avec succès !", response);
         alert("Mot de passe envoyé avec succès !");
